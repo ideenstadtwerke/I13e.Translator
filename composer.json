@@ -1,0 +1,27 @@
+{
+    "name": "i13e/translator",
+    "description": "CLI Tool to generate XLIFF files for neos node types",
+    "type": "neos-package",
+    "keywords": ["neos", "flow","xliff", "xlf","i18n", "translation"],
+    "license": "MIT",
+    "require": {
+        "ext-dom": "*",
+        "neos/flow": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "I13e\\Translator\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "I13e.Translator"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dominik Jansen",
+            "email": "dominik.jansen@leineenergie.de"
+        }
+    ]
+}
