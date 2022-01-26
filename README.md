@@ -1,4 +1,6 @@
 # I13e.Translator
+[![Latest Stable Version](http://poser.pugx.org/i13e/translator/v)](https://packagist.org/packages/i13e/translator) [![Total Downloads](http://poser.pugx.org/i13e/translator/downloads)](https://packagist.org/packages/i13e/translator) [![Latest Unstable Version](http://poser.pugx.org/i13e/translator/v/unstable)](https://packagist.org/packages/i13e/translator) [![License](http://poser.pugx.org/i13e/translator/license)](https://packagist.org/packages/i13e/translator) [![PHP Version Require](http://poser.pugx.org/i13e/translator/require/php)](https://packagist.org/packages/i13e/translator)
+
 ## CLI Tool to generate XLIFF files for neos node types
 
 Small CLI command to generate all node type related translations.
