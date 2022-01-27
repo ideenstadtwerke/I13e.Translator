@@ -4,7 +4,6 @@ namespace I13e\Translator\Xliff;
 
 class XliffMessages
 {
-
     /**
      * @var XliffMessage[]|array
      */
