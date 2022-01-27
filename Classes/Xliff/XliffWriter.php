@@ -4,6 +4,7 @@ namespace I13e\Translator\Xliff;
 
 use DOMDocument;
 use Exception;
+
 use const DIRECTORY_SEPARATOR;
 
 class XliffWriter
@@ -64,10 +65,10 @@ class XliffWriter
     protected function saveXliff(string $xliffContent, string $language, string $packagePath, string $nodeType): void
     {
         $filename = $packagePath . str_replace(
-                ['{locale}', '{nodeType}'],
-                [$language, str_replace('.', DIRECTORY_SEPARATOR, $nodeType)],
-                $this->filePathTemplate
-            );
+            ['{locale}', '{nodeType}'],
+            [$language, str_replace('.', DIRECTORY_SEPARATOR, $nodeType)],
+            $this->filePathTemplate
+        );
         if (file_exists($filename)) {
             $message = sprintf('File "%s" already exists.', $filename);
             if (!$this->force) {
@@ -138,5 +139,4 @@ class XliffWriter
 
         return $dom->saveXML() ?: '';
     }
-
 }

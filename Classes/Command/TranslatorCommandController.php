@@ -9,6 +9,7 @@ use Neos\Flow\Cli\CommandController;
 use Neos\Flow\Configuration\Exception\InvalidConfigurationTypeException;
 use Neos\Flow\Package\Exception\UnknownPackageException;
 use Neos\Flow\Package\PackageManager;
+
 use const STR_PAD_LEFT;
 
 /**
@@ -65,7 +66,10 @@ class TranslatorCommandController extends CommandController
         $nodeType = $argumentParts[1] ?? null;
 
         if (!$nodeType) {
-            if (!$this->packageManager->isPackageKeyValid($packageKey) || !$this->packageManager->isPackageAvailable($packageKey)) {
+            if (
+                !$this->packageManager->isPackageKeyValid($packageKey)
+                || !$this->packageManager->isPackageAvailable($packageKey)
+            ) {
                 $this->outputLine('<error>Package "%s" is not available.</error>', [$packageKey]);
                 exit(2);
             }
@@ -98,7 +102,8 @@ class TranslatorCommandController extends CommandController
 
         $current = 0;
         $count = 0;
-        array_walk($translations,
+        array_walk(
+            $translations,
             static function ($entries) use (&$count) {
                 $count += count($entries);
             }
@@ -111,14 +116,29 @@ class TranslatorCommandController extends CommandController
                 string $field,
                 string $targetLanguage,
                 ?string $sourceText = null
-            ) use ($packageKey, $output, &$current, $count) {
+            ) use (
+                $packageKey,
+                $output,
+                &$current,
+                $count
+) {
                 return $output->ask(
-                        sprintf('<comment>[%5$s/%6$s] Please translate "<info>%2$s</info>" for "<info>%3$s</info>" to "<question>%1$s</question>":</comment> ',
-                            $targetLanguage, $field, $nodeTypeName, $packageKey,
-                            str_pad(++$current, strlen($count), ' ', STR_PAD_LEFT),
-                            $count)
-                    ) ?? NodeTypeTranslationService::defaultMessageTranslator($nodeTypeName, $field, $targetLanguage,
-                        $sourceText);
+                    sprintf(
+                        '<comment>[%5$s/%6$s] Please translate "<info>%2$s</info>"' .
+                        ' for "<info>%3$s</info>" to "<question>%1$s</question>":</comment> ',
+                        $targetLanguage,
+                        $field,
+                        $nodeTypeName,
+                        $packageKey,
+                        str_pad(++$current, strlen($count), ' ', STR_PAD_LEFT),
+                        $count
+                    )
+                ) ?? NodeTypeTranslationService::defaultMessageTranslator(
+                    $nodeTypeName,
+                    $field,
+                    $targetLanguage,
+                    $sourceText
+                );
             }
             : null;
 

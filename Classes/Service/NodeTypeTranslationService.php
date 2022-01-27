@@ -11,7 +11,6 @@ use Neos\Flow\Package\PackageManager;
 
 class NodeTypeTranslationService
 {
-
     /**
      * @Flow\Inject
      * @var PackageManager
@@ -44,8 +43,10 @@ class NodeTypeTranslationService
                 continue;
             }
             if (is_array($value)) {
-                $results = array_merge_recursive($results,
-                    $this->findTranslationFields($value, $localNodeTypeName, $currentPath));
+                $results = array_merge_recursive(
+                    $results,
+                    $this->findTranslationFields($value, $localNodeTypeName, $currentPath)
+                );
             }
         }
 
