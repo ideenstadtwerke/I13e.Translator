@@ -72,8 +72,8 @@ class TranslatorCommandController extends CommandController
 
             $nodeTypesToTranslate = $this->nodeTypeConfigurationService->getNodeTypes($packageKey);
         } else {
-            if (!$nodeTypeConfiguration = $this->nodeTypeConfigurationService->getNodeType($nodeType)) {
-                $this->outputLine('<error>Node type "%s" is not available.</error>', [$nodeType]);
+            if (!$nodeTypeConfiguration = $this->nodeTypeConfigurationService->getNodeType($packageKeyOrNodeType)) {
+                $this->outputLine('<error>Node type "%s" is not available.</error>', [$packageKeyOrNodeType]);
                 exit(2);
             }
             $nodeTypesToTranslate = $nodeTypeConfiguration;
