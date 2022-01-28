@@ -9,7 +9,7 @@ use const DIRECTORY_SEPARATOR;
 
 class XliffWriter
 {
-    protected $filePathTemplate = 'Resources/Private/Translations/{locale}/{nodeType}.xlf';
+    protected $filePathTemplate = 'Resources/Private/Translations/{locale}/NodeTypes/{nodeType}.xlf';
     protected bool $force;
 
     /**

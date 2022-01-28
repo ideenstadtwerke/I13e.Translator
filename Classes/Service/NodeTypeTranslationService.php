@@ -89,6 +89,7 @@ class NodeTypeTranslationService
 
         foreach ($translationFields as $nodeTypeName => $fields) {
             foreach ($fields as $field) {
+                $field = $this->cleanupField($field);
                 $translatedText = $translator($nodeTypeName, $field, strtoupper($sourceLanguage));
                 $message = $messages->addMessage($nodeTypeName, $field, $translatedText);
                 foreach ($targetLanguages as $targetLanguage) {
@@ -104,6 +105,25 @@ class NodeTypeTranslationService
         }
 
         return $messages;
+    }
+
+    /**
+     * @param string $fieldName
+     * @return string
+     */
+    protected function cleanupField(string $fieldName):string
+    {
+        if (strpos($fieldName, '.tabs.') !== false) {
+            return preg_replace('/.*\.tabs\.([^.]+)\.label/', 'tabs.$1', $fieldName);
+        }
+        if (strpos($fieldName, '.groups.') !== false) {
+            return preg_replace('/.*\.groups\.([^.]+)\.label/', 'groups.$1', $fieldName);
+        }
+        if (strpos($fieldName, 'properties.') === 0) {
+            return preg_replace('/^properties\.([^.]+)\.ui\.label$/', 'properties.$1', $fieldName);
+        }
+
+        return $fieldName;
     }
 
     /**
